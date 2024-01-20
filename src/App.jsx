@@ -5,7 +5,7 @@ export default function App() {
   const [newItem, setNewItem] = useState("");
   const [todos, setTodos] = useState([]);
 
-  //handle submit function
+  //handle submit function for Add btn
   function handleSubmit(e) {
     //prevents reloading the page after clicking add
     e.preventDefault();
@@ -22,7 +22,7 @@ export default function App() {
     setNewItem("");
   }
 
-  //handle check buttons
+  //handle check buttons to indicate the item in the list is checked
   function toggleTodo(id, completed) {
     //Logic for checking the items in the list
     setTodos((currentTodos) => {
@@ -33,6 +33,12 @@ export default function App() {
 
         return todos;
       });
+    });
+  }
+
+  function deleteTodoItem(id) {
+    setTodos((currentTodos) => {
+      return currentTodos.filter((todos) => todos.id != id);
     });
   }
 
@@ -51,7 +57,12 @@ export default function App() {
                 />
                 {todos.title}
               </label>
-              <button className="btn btn-danger">Delete</button>
+              <button
+                onClick={() => deleteTodoItem(todos.id)}
+                className="btn btn-danger"
+              >
+                Delete
+              </button>
             </li>
           );
         })}
